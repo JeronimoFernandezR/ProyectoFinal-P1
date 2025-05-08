@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /*Clientes: Personas que poseen cuentas en el banco y pueden realizar transacciones.
  */
 
-public class Cliente extends Usuario{
+public class Cliente extends Persona{
 
     private int edad;
     private String direccion;
@@ -14,7 +14,7 @@ public class Cliente extends Usuario{
     private ArrayList<Cuenta> cuentas;
 
     public Cliente(String nombre, String correo, String id,String contraseña, int edad, String direccion, String telefono, String ciudad) {
-        super(nombre, correo, id,contraseña);
+        super(nombre, correo, id);
         this.edad = edad;
         this.direccion = direccion;
         this.telefono = telefono;

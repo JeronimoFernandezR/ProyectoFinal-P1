@@ -4,6 +4,8 @@
  */
 package org.uniquindio.edu.co.poo.proyectofinalp1.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author river
@@ -12,8 +14,8 @@ public class CuentaCorriente extends Cuenta{
     
     private double capacidadSobregiro;
     
-    public CuentaCorriente(String id, double saldo, Cliente cliente, double capacidadSobregiro){
-        super(id, saldo, cliente);
+    public CuentaCorriente(String idCuenta, double saldo, Cliente cliente, ArrayList<Transaccion> transacciones, double capacidadSobregiro){
+        super(idCuenta, saldo, cliente, transacciones);
         this.capacidadSobregiro = capacidadSobregiro;
     }
 

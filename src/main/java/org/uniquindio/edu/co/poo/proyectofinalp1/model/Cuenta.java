@@ -1,28 +1,26 @@
 package org.uniquindio.edu.co.poo.proyectofinalp1.model;
 
+import java.util.ArrayList;
+
 /*
  * Cuenta de ahorro: Diseñada para clientes que buscan acumular intereses sobre su saldo.
  */
 
 public abstract class Cuenta {
 
-    protected Cliente cliente;
-    protected String id;
+    private String idCuenta;
     protected double saldo;
+    protected Cliente cliente;
+    private ArrayList<Transaccion> transacciones;
 
-    public Cuenta(String id, double saldo, Cliente cliente) {
-        this.id = id;
+    public Cuenta(String idCuenta, double saldo, Cliente cliente, ArrayList<Transaccion> transacciones) {
+        this.idCuenta = idCuenta;
         this.saldo = saldo;
         this.cliente = cliente;
+        this.transacciones= new ArrayList<Transaccion>();
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    
 
     public double getSaldo() {
         return saldo;
@@ -44,6 +42,34 @@ public abstract class Cuenta {
      */
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    /**
+     * @return the transacciones
+     */
+    public ArrayList<Transaccion> getTransacciones() {
+        return transacciones;
+    }
+
+    /**
+     * @param transacciones the transacciones to set
+     */
+    public void setTransacciones(ArrayList<Transaccion> transacciones) {
+        this.transacciones = transacciones;
+    }
+
+    /**
+     * @return the idCuenta
+     */
+    public String getIdCuenta() {
+        return idCuenta;
+    }
+
+    /**
+     * @param idCuenta the idCuenta to set
+     */
+    public void setIdCuenta(String idCuenta) {
+        this.idCuenta = idCuenta;
     }
 
    

@@ -1,57 +1,69 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Record.java to edit this template
+ */
 package org.uniquindio.edu.co.poo.proyectofinalp1.model;
 
-/*
- * Usuarios
-    Clientes: Personas que poseen cuentas en el banco y pueden realizar transacciones.
-    Cajeros: Encargados de gestionar transacciones para los clientes.
-    Administradores: Personal con acceso total para la gestión del banco.
+
+/**
+ *
+ * @author river
  */
+public class Usuario{
+   private String nombreUsuario;
+   private String contraseñaUsuario;
+   private Persona persona;
+   
+   public Usuario(String nombreSUsuario,String contraseñaUsuario,Persona persona){
+       this.nombreUsuario=nombreSUsuario;
+       this.contraseñaUsuario=contraseñaUsuario;
+       this.persona=persona;
 
-public abstract class Usuario {
-    String nombre;
-    String correo;
-    String id;
-    private String contraseña;
+}
 
-    public Usuario(String nombre, String correo, String id, String contraseña) {
-        this.nombre = nombre;
-        this.correo = correo;
-        this.id = id;
-        this.contraseña=contraseña;
-        
-    }
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public String getCorreo() {
-        return correo;
-    }
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
+    /**
+     * @return the nombreUsuario
+     */
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
     /**
-     * @return the contraseña
+     * @param nombreUsuario the nombreUsuario to set
      */
-    public String getContraseña() {
-        return contraseña;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     /**
-     * @param contraseña the contraseña to set
+     * @return the contraseñaUsuario
      */
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public String getContraseñaUsuario() {
+        return contraseñaUsuario;
+    }
+
+    /**
+     * @param contraseñaUsuario the contraseñaUsuario to set
+     */
+    public void setContraseñaUsuario(String contraseñaUsuario) {
+        this.contraseñaUsuario = contraseñaUsuario;
+    }
+
+    /**
+     * @return the persona
+     */
+    public Persona getPersona() {
+        return persona;
+    }
+
+    /**
+     * @param persona the persona to set
+     */
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
     
+ 
 
+        
 }

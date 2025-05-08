@@ -4,6 +4,8 @@
  */
 package org.uniquindio.edu.co.poo.proyectofinalp1.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author river
@@ -11,12 +13,11 @@ package org.uniquindio.edu.co.poo.proyectofinalp1.model;
 public class CuentaEmpresarial extends Cuenta{
     
     private int NIT;
-    private String nombre;
     
-    public CuentaEmpresarial(String id, double saldo, Cliente cliente, int NIT, String nombre){
-        super(id, saldo, cliente);
+    public CuentaEmpresarial(String idCuenta, double saldo, Cliente cliente,ArrayList<Transaccion> transacciones, int NIT, String nombre){
+        super(idCuenta, saldo, cliente,transacciones);
         this.NIT = NIT;
-        this.nombre = nombre;
+        
     }
 
     /**
@@ -32,22 +33,6 @@ public class CuentaEmpresarial extends Cuenta{
     public void setNIT(int NIT) {
         this.NIT = NIT;
     }
-
-    /**
-     * @return the nombre
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    
-    
+        
 }
 
