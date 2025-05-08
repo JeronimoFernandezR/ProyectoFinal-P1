@@ -4,6 +4,8 @@
  */
 package org.uniquindio.edu.co.poo.proyectofinalp1.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author river
@@ -12,8 +14,8 @@ public class CuentaAhorro extends Cuenta{
     
     private double tasaInteres;
     
-    public CuentaAhorro(String id, double saldo, Cliente cliente, double tasaInteres){
-        super(id, saldo, cliente);
+    public CuentaAhorro(String idCuenta, double saldo, Cliente cliente, ArrayList<Transaccion> transacciones, double tasaInteres){
+        super(idCuenta, saldo, cliente,transacciones );
         this.tasaInteres = tasaInteres;
     }
 
