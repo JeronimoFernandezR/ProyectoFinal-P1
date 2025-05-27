@@ -41,7 +41,7 @@ public class Administrador extends Persona {
                 return false;
             }
         }
-        banco.getPersonas().add(cajero);
+        banco.getPersonas().add(cajero); // SOLO aquí
         System.out.println("Cajero agregado exitosamente.");
         return true;
     }
@@ -80,7 +80,7 @@ public class Administrador extends Persona {
                 return false;
             }
         }
-        banco.getPersonas().add(cliente);
+        banco.getPersonas().add(cliente); // SOLO aquí
         System.out.println("Cliente agregado exitosamente.");
         return true;
     }

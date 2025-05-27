@@ -37,7 +37,7 @@ public class Cajero extends Persona {
                 return;
             }
         }
-        banco.getPersonas().add(cliente);
+        banco.getPersonas().add(cliente); // SOLO aquí
         System.out.println("Cliente registrado exitosamente.");
     }
 
@@ -144,5 +144,37 @@ public class Cajero extends Persona {
             }
         }
         System.out.println(reporte.toString());
+    }
+
+    /**
+     * Agrega un cajero al banco si no está ya registrado.
+     * @param cajero Cajero a registrar.
+     */
+    public boolean agregarCajero(Cajero cajero) {
+        for (Persona p : banco.getPersonas()) {
+            if (p instanceof Cajero && p.getId().equals(cajero.getId())) {
+                System.out.println("El cajero con ID " + cajero.getId() + " ya está registrado.");
+                return false;
+            }
+        }
+        banco.getPersonas().add(cajero); // SOLO aquí
+        System.out.println("Cajero agregado exitosamente.");
+        return true;
+    }
+
+    /**
+     * Agrega un administrador al banco si no está ya registrado.
+     * @param admin Administrador a registrar.
+     */
+    public boolean agregarAdministrador(Administrador admin) {
+        for (Persona p : banco.getPersonas()) {
+            if (p instanceof Administrador && p.getId().equals(admin.getId())) {
+                System.out.println("El administrador con ID " + admin.getId() + " ya está registrado.");
+                return false;
+            }
+        }
+        banco.getPersonas().add(admin); // SOLO aquí
+        System.out.println("Administrador agregado exitosamente.");
+        return true;
     }
 }

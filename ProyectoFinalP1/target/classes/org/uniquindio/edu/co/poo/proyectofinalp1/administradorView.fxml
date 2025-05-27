@@ -29,7 +29,9 @@
                             <Label text="Listar Cajeros"/>
                             <TextField fx:id="buscarCajeroPorNombre" promptText="Nombre"/>
                             <Button fx:id="btnListarCajeros" text="Listar Cajeros" onAction="#handleListarCajeros"/>
-                            <Button fx:id="btnEliminarCajero" text="Eliminar Cajero" onAction="#handleEliminarCajero"/>
+                            <Label text="Eliminar Cajero"/>
+                            <TextField fx:id="idCajeroEliminar" />
+                            <Button text="Eliminar Cajero" onAction="#handleEliminarCajero"/>
                             <TableView fx:id="tablaCajeros" prefHeight="200">
                                 <columns>
                                     <TableColumn fx:id="colNombreCajero" text="Nombre"/>
@@ -65,8 +67,8 @@
                             </GridPane>
                             <Button fx:id="btnAgregarCliente" text="Agregar Cliente" onAction="#handleAgregarCliente"/>
                             <Label text="Eliminar Cliente"/>
-                            <TextField fx:id="idEliminarCliente" promptText="ID"/>
-                            <Button text="Eliminar Cliente" fx:id="btnEliminarCliente" onAction="#handleEliminarCliente"/>
+                            <TextField fx:id="idClienteEliminar" />
+                            <Button text="Eliminar Cliente" onAction="#handleEliminarCliente"/>
                             <Label text="Listar Clientes"/>
                             <Button fx:id="btnListarClientes" text="Listar Clientes" onAction="#handleListarClientes"/>
                             <TableView fx:id="tablaClientes" prefHeight="200">
@@ -83,15 +85,17 @@
                     <AnchorPane>
                         <VBox spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
                             <Label text="Agregar Cuenta"/>
-                            <GridPane hgap="10" vgap="10">
-                                <Label text="ID Cuenta:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                                <TextField fx:id="idCuenta" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                                <Label text="Tipo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                                <TextField fx:id="tipoCuenta" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-                                <Label text="Saldo Inicial:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                                <TextField fx:id="saldoInicialCuenta" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-                            </GridPane>
-                            <Button fx:id="btnAgregarCuenta" text="Agregar Cuenta" onAction="#handleAgregarCuenta"/>
+                            <HBox spacing="10">
+                                <Label text="ID Cuenta:"/>
+                                <TextField fx:id="idCuenta"/>
+                                <Label text="Tipo de Cuenta:"/>
+                                <ComboBox fx:id="comboTipoCuenta" promptText="Tipo de cuenta"/>
+                                <Label text="Saldo Inicial:"/>
+                                <TextField fx:id="saldoInicialCuenta"/>
+                                <Label text="ID Cliente:"/>
+                                <TextField fx:id="idClienteCuenta"/>
+                                <Button fx:id="btnAgregarCuenta" text="Agregar Cuenta" onAction="#handleAgregarCuenta"/>
+                            </HBox>
                             <Label text="Eliminar Cuenta"/>
                             <TextField fx:id="idEliminarCuenta" promptText="ID"/>
                             <Button text="Eliminar Cuenta" fx:id="btnEliminarCuenta" onAction="#handleEliminarCuenta"/>

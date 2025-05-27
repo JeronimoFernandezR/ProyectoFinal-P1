@@ -11,6 +11,7 @@ import org.uniquindio.edu.co.poo.proyectofinalp1.model.Cliente;
 import org.uniquindio.edu.co.poo.proyectofinalp1.model.Cuenta;
 import org.uniquindio.edu.co.poo.proyectofinalp1.model.CuentaAhorro;
 import org.uniquindio.edu.co.poo.proyectofinalp1.model.CuentaCorriente;
+import org.uniquindio.edu.co.poo.proyectofinalp1.model.CuentaEmpresarial;
 import org.uniquindio.edu.co.poo.proyectofinalp1.model.Transaccion;
 
 import javafx.collections.FXCollections;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -36,12 +38,21 @@ public class AdministradorController {
     @FXML private CheckBox estadoActivoCajero;
     @FXML private Button btnAgregarCajero, btnListarCajeros, btnEliminarCajero;
 
-    @FXML private TextField nombreCliente, correoCliente, idCliente;
-    @FXML private PasswordField contrasenaCliente;
-    @FXML private TextField edadCliente, direccionCliente, telefonoCliente, ciudadCliente;
+
+    @FXML private TextField nombreCliente;
+    @FXML private TextField correoCliente;
+    @FXML private TextField idCliente;           // Para agregar cliente
+    @FXML private PasswordField contrasenaCliente; // O TextField, según el FXML
+    @FXML private TextField edadCliente;
+    @FXML private TextField direccionCliente;
+    @FXML private TextField telefonoCliente;
+    @FXML private TextField ciudadCliente;
     @FXML private Button btnAgregarCliente, btnListarClientes, btnEliminarCliente;
 
-    @FXML private TextField idCuenta, tipoCuenta, saldoInicialCuenta, idEliminarCuenta;
+    @FXML private TextField idCuenta, saldoInicialCuenta, idEliminarCuenta;
+    @FXML private TextField idClienteEliminar;   // Para eliminar cliente
+    @FXML private TextField idCajeroEliminar;   // Para eliminar cajero
+    @FXML private ComboBox<String> comboTipoCuenta;
     @FXML private Button btnAgregarCuenta, btnListarCuentas, btnEliminarCuenta;
 
     @FXML private TextField idBuscarTransaccion;
@@ -62,7 +73,7 @@ public class AdministradorController {
 
     // Referencia al banco y administrador autenticado
     private Banco banco = App.banco;
-    private Administrador administrador;
+    private Administrador administrador = (Administrador) App.usuarioAutenticado.getPersona();
 
     /**
      * Inicializa la vista y configura las columnas de las tablas.
@@ -109,6 +120,10 @@ public class AdministradorController {
             });
         if (colMontoTransaccion != null)
             colMontoTransaccion.setCellValueFactory(new PropertyValueFactory<>("monto"));
+
+        if (comboTipoCuenta != null) {
+            comboTipoCuenta.getItems().setAll("Ahorro", "Corriente", "Empresarial");
+        }
     }
 
     /**
@@ -163,44 +178,48 @@ public class AdministradorController {
             mostrarAlerta("El administrador no está activo. No puede realizar esta acción.");
             return;
         }
-        if (idCajero.getText().isEmpty()) {
+        if (idCajeroEliminar.getText() == null || idCajeroEliminar.getText().trim().isEmpty()) {
             mostrarAlerta("Debes ingresar el ID del cajero a eliminar.");
             return;
         }
-        boolean exito = administrador.eliminarCajero(idCajero.getText());
+        boolean exito = administrador.eliminarCajero(idCajeroEliminar.getText().trim());
         mostrarAlerta(exito ? "Cajero eliminado." : "No se pudo eliminar el cajero.");
         listarCajeros();
-        idCajero.clear();
+        idCajeroEliminar.clear();
     }
 
     @FXML
     private void handleAgregarCliente() {
-        if (administrador != null && !administrador.isEmpleadoActivo()) {
-            mostrarAlerta("El administrador no está activo. No puede realizar esta acción.");
-            return;
-        }
-        if (nombreCliente.getText().isEmpty() || correoCliente.getText().isEmpty() || idCliente.getText().isEmpty()
-                || contrasenaCliente.getText().isEmpty() || edadCliente.getText().isEmpty()
-                || direccionCliente.getText().isEmpty() || telefonoCliente.getText().isEmpty() || ciudadCliente.getText().isEmpty()) {
+        if (nombreCliente.getText().trim().isEmpty() ||
+            correoCliente.getText().trim().isEmpty() ||
+            idCliente.getText().trim().isEmpty() ||
+            contrasenaCliente.getText().trim().isEmpty() ||
+            edadCliente.getText().trim().isEmpty() ||
+            direccionCliente.getText().trim().isEmpty() ||
+            telefonoCliente.getText().trim().isEmpty() ||
+            ciudadCliente.getText().trim().isEmpty()) {
             mostrarAlerta("Todos los campos de cliente son obligatorios.");
             return;
         }
         try {
+            int edad = Integer.parseInt(edadCliente.getText().trim());
             Cliente cliente = new Cliente(
-                nombreCliente.getText(),
-                correoCliente.getText(),
-                idCliente.getText(),
-                contrasenaCliente.getText(),
-                Integer.parseInt(edadCliente.getText()),
-                direccionCliente.getText(),
-                telefonoCliente.getText(),
-                ciudadCliente.getText()
+                nombreCliente.getText().trim(),
+                correoCliente.getText().trim(),
+                idCliente.getText().trim(),
+                contrasenaCliente.getText().trim(),
+                edad,
+                direccionCliente.getText().trim(),
+                telefonoCliente.getText().trim(),
+                ciudadCliente.getText().trim()
             );
             boolean exito = administrador.agregarCliente(cliente);
             mostrarAlerta(exito ? "Cliente agregado." : "No se pudo agregar el cliente.");
             listarClientes();
             nombreCliente.clear(); correoCliente.clear(); idCliente.clear(); contrasenaCliente.clear();
             edadCliente.clear(); direccionCliente.clear(); telefonoCliente.clear(); ciudadCliente.clear();
+        } catch (NumberFormatException e) {
+            mostrarAlerta("Edad inválida.");
         } catch (Exception e) {
             mostrarAlerta("Datos inválidos para cliente.");
         }
@@ -221,41 +240,43 @@ public class AdministradorController {
             mostrarAlerta("El administrador no está activo. No puede realizar esta acción.");
             return;
         }
-        if (idCliente.getText().isEmpty()) {
+        if (idClienteEliminar.getText() == null || idClienteEliminar.getText().trim().isEmpty()) {
             mostrarAlerta("Debes ingresar el ID del cliente a eliminar.");
             return;
         }
-        boolean exito = administrador.eliminarCliente(idCliente.getText());
+        String id = idClienteEliminar.getText().trim();
+        boolean exito = administrador.eliminarCliente(id);
         mostrarAlerta(exito ? "Cliente eliminado." : "No se pudo eliminar el cliente.");
         listarClientes();
-        idCliente.clear();
+        idClienteEliminar.clear();
     }
+
+    @FXML private TextField idClienteCuenta;     // Para asociar cuenta a cliente
 
     @FXML
     private void handleAgregarCuenta() {
-        if (administrador != null && !administrador.isEmpleadoActivo()) {
-            mostrarAlerta("El administrador no está activo. No puede realizar esta acción.");
-            return;
-        }
-        if (idCuenta.getText().isEmpty() || tipoCuenta.getText().isEmpty() || saldoInicialCuenta.getText().isEmpty() || idCliente.getText().isEmpty()) {
+        if (idCuenta.getText().isEmpty() || comboTipoCuenta.getValue() == null ||
+            saldoInicialCuenta.getText().isEmpty() || idClienteCuenta.getText().isEmpty()) {
             mostrarAlerta("Todos los campos de cuenta son obligatorios.");
             return;
         }
         try {
             Cliente cliente = banco.getClientes().stream()
-                .filter(c -> c.getId().equals(idCliente.getText()))
+                .filter(c -> c.getId().equals(idClienteCuenta.getText()))
                 .findFirst().orElse(null);
             if (cliente == null) {
                 mostrarAlerta("Cliente no encontrado.");
                 return;
             }
             Cuenta cuenta;
-            String tipo = tipoCuenta.getText().toLowerCase();
+            String tipo = comboTipoCuenta.getValue().toLowerCase();
             double saldoInicial = Double.parseDouble(saldoInicialCuenta.getText());
             if (tipo.equals("ahorro")) {
                 cuenta = new CuentaAhorro(idCuenta.getText(), saldoInicial, cliente, new ArrayList<>());
             } else if (tipo.equals("corriente")) {
                 cuenta = new CuentaCorriente(idCuenta.getText(), saldoInicial, cliente, new ArrayList<>(), 200.0);
+            } else if (tipo.equals("empresarial")) {
+                cuenta = new CuentaEmpresarial(idCuenta.getText(), saldoInicial, cliente, new ArrayList<>(), 0); // Ajusta el NIT si es necesario
             } else {
                 mostrarAlerta("Tipo de cuenta no válido.");
                 return;
@@ -263,7 +284,7 @@ public class AdministradorController {
             boolean exito = administrador.agregarCuenta(cuenta);
             mostrarAlerta(exito ? "Cuenta agregada." : "No se pudo agregar la cuenta.");
             listarCuentas();
-            idCuenta.clear(); tipoCuenta.clear(); saldoInicialCuenta.clear(); idCliente.clear();
+            idCuenta.clear(); saldoInicialCuenta.clear(); idClienteCuenta.clear(); comboTipoCuenta.getSelectionModel().clearSelection();
         } catch (Exception e) {
             mostrarAlerta("Datos inválidos para cuenta.");
         }

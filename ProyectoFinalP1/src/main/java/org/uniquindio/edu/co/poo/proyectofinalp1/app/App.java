@@ -58,15 +58,17 @@ public class App extends Application {
     private void cargarUsuariosDePrueba() {
         // Administrador activo
         Administrador adminActivo = new Administrador(
-            banco, "Admin Juan", "admin@banco.com", "admin1", "adminpass", "A001", true
+            App.banco, "Admin Juan", "admin@banco.com", "admin1", "adminpass", "A001", true
         );
+        banco.getPersonas().add(adminActivo); // <-- AGREGA AQUÍ
         Usuario usuarioAdmin = new Usuario("admin", "adminpass", adminActivo, new ArrayList<>());
         banco.getUsuarios().add(usuarioAdmin);
 
         // Administrador inactivo
         Administrador adminInactivo = new Administrador(
-            banco, "Admin Inactivo", "admin2@banco.com", "admin2", "adminpass2", "A002", false
+            App.banco, "Admin Inactivo", "admin2@banco.com", "admin2", "adminpass2", "A002", false
         );
+        banco.getPersonas().add(adminInactivo); // <-- AGREGA AQUÍ
         Usuario usuarioAdminInactivo = new Usuario("admin2", "adminpass2", adminInactivo, new ArrayList<>());
         banco.getUsuarios().add(usuarioAdminInactivo);
 
@@ -74,6 +76,7 @@ public class App extends Application {
         Cajero cajeroActivo = new Cajero(
             banco, "Cajero Pedro", "cajero@banco.com", "cajero1", "cajeropass", "C001", true
         );
+        banco.getPersonas().add(cajeroActivo); // <-- AGREGA AQUÍ
         adminActivo.agregarCajero(cajeroActivo);
         Usuario usuarioCajero = new Usuario("cajero", "cajeropass", cajeroActivo, new ArrayList<>());
         banco.getUsuarios().add(usuarioCajero);
@@ -82,6 +85,7 @@ public class App extends Application {
         Cajero cajeroInactivo = new Cajero(
             banco, "Cajero Inactivo", "cajero2@banco.com", "cajero2", "cajeropass2", "C002", false
         );
+        banco.getPersonas().add(cajeroInactivo); // <-- AGREGA AQUÍ
         adminActivo.agregarCajero(cajeroInactivo);
         Usuario usuarioCajeroInactivo = new Usuario("cajero2", "cajeropass2", cajeroInactivo, new ArrayList<>());
         banco.getUsuarios().add(usuarioCajeroInactivo);
@@ -134,12 +138,6 @@ public class App extends Application {
         for (var t : banco.getTransacciones()) {
             System.out.println("ID de transacción: " + t.getIdTransaccion());
         }
-        banco.getPersonas().add(cliente1);
-        banco.getPersonas().add(cliente2);
-        banco.getPersonas().add(cajeroActivo);
-        banco.getPersonas().add(cajeroInactivo);
-        banco.getPersonas().add(adminActivo);
-        banco.getPersonas().add(adminInactivo);
     }
 
     /**
