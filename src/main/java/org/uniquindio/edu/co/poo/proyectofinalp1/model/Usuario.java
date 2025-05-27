@@ -1,25 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Record.java to edit this template
- */
 package org.uniquindio.edu.co.poo.proyectofinalp1.model;
 
+import java.util.ArrayList;
 
 /**
- *
- * @author river
+ * Clase que representa un usuario del sistema.
+ * Los usuarios pueden ser clientes o empleados del banco.
  */
-public class Usuario{
-   private String nombreUsuario;
-   private String contraseñaUsuario;
-   private Persona persona;
-   
-   public Usuario(String nombreSUsuario,String contraseñaUsuario,Persona persona){
-       this.nombreUsuario=nombreSUsuario;
-       this.contraseñaUsuario=contraseñaUsuario;
-       this.persona=persona;
+public class Usuario {
 
-}
+    private String nombreUsuario;
+    private String contraseñaUsuario;
+    private Persona persona;
+    private ArrayList<Cuenta> listaCuentas;
+
+    /**
+     * Constructor de la clase Usuario.
+     * @param nombreUsuario Nombre de usuario.
+     * @param contraseñaUsuario Contraseña del usuario.
+     * @param persona Persona asociada al usuario.
+     * @param listaCuentas Lista de cuentas asociadas al usuario.
+     */
+    public Usuario(String nombreUsuario, String contraseñaUsuario, Persona persona, ArrayList<Cuenta> listaCuentas) {
+        this.nombreUsuario = nombreUsuario;
+        this.contraseñaUsuario = contraseñaUsuario;
+        this.persona = persona;
+        this.listaCuentas = new ArrayList<>();
+    }
 
     /**
      * @return the nombreUsuario
@@ -62,8 +68,9 @@ public class Usuario{
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
-    
- 
 
-        
+    public ArrayList<Cuenta> getListaCuentas() {
+        return listaCuentas;
+    }
+   
 }

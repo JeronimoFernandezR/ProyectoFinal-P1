@@ -1,16 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Record.java to edit this template
- */
 package org.uniquindio.edu.co.poo.proyectofinalp1.model;
 
 import java.util.Date;
 
 /**
- *
- * @author river
+ * Clase que representa una transacción bancaria.
+ * Las transacciones pueden ser depósitos, retiros o transferencias.
  */
-
 public class Transaccion {
 
     private Cuenta cuentaOrigen;
@@ -20,7 +15,15 @@ public class Transaccion {
     private Date fecha;
     private Cajero cajero;
 
-    // Constructor
+    /**
+     * Constructor de la clase Transaccion.
+     * @param cuentaOrigen Cuenta de origen de la transacción.
+     * @param cuentaDestino Cuenta de destino de la transacción.
+     * @param monto Monto de la transacción.
+     * @param idTransaccion Identificador único de la transacción.
+     * @param fecha Fecha de la transacción.
+     * @param cajero Cajero que realizó la transacción.
+     */
     public Transaccion(Cuenta cuentaOrigen, Cuenta cuentaDestino, double monto, String idTransaccion, Date fecha, Cajero cajero) {
         this.cuentaOrigen = cuentaOrigen;
         this.cuentaDestino = cuentaDestino;
@@ -79,7 +82,10 @@ public class Transaccion {
         this.cajero = cajero;
     }
 
-    // Método toString para representar la transacción
+    /**
+     * Representación textual de la transacción.
+     * @return Cadena con los detalles de la transacción.
+     */
     @Override
     public String toString() {
         return "Transaccion{" +
