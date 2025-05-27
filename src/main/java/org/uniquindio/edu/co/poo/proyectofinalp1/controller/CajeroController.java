@@ -36,7 +36,7 @@ public class CajeroController {
     // Registro de cliente
     @FXML private TextField txtName, txtEmail, txtId, txtAge, txtPhone, txtCity;
     @FXML private TextArea txtAddress;
-    @FXML private TextField txtUserPassword; // Debe coincidir con el FXML
+    @FXML private TextField txtUserPassword; 
     @FXML private Button btnSubmitCustomer;
 
     // Depósito
@@ -131,7 +131,7 @@ public class CajeroController {
             );
             actualizarTablaCuentas();
         }
-        // ...configura otras columnas si tienes más tablas...
+        
     }
 
     /**
@@ -173,7 +173,7 @@ public class CajeroController {
         String nombre = txtName.getText();
         String correo = txtEmail.getText();
         String id = txtId.getText();
-        String contrasena = txtUserPassword.getText(); // Usa el campo correcto
+        String contrasena = txtUserPassword.getText(); 
         int edad;
         try {
             edad = Integer.parseInt(txtAge.getText());
@@ -228,7 +228,7 @@ public class CajeroController {
         Cuenta cuenta = buscarCuentaPorId(cuentaId);
         double monto = parsearMonto(montoStr);
         if (cuenta != null && monto > 0) {
-            cuenta.depositar(monto, cajero); // Suma el monto al saldo
+            cuenta.depositar(monto, cajero); 
             mostrarAlerta("Depósito realizado. Nuevo saldo: $" + String.format("%,.2f", cuenta.getSaldo()));
             lblResultadoSaldo.setText(String.format("Saldo: $%,.2f", cuenta.getSaldo()));
             txtCuentaDeposito.clear(); txtMontoDeposito.clear();

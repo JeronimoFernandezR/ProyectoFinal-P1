@@ -18,20 +18,27 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Aplicación principal JavaFX.
- * Gestiona la carga de vistas y la inicialización de datos de prueba.
- *
- * Autor: Jerónimo Fernández Rivera
- * Fecha: 27/05/2025
+ * Clase principal de la aplicación JavaFX.
+ * Gestiona la inicialización, carga de vistas y datos de prueba.
  */
 public class App extends Application {
+    /**
+     * Instancia global del banco.
+     */
+    public static Banco banco = new Banco("Banco UQ");
 
+    /**
+     * Usuario autenticado actualmente.
+     */
+    public static Usuario usuarioAutenticado;
+
+    /** Escena principal de la aplicación. */
     private static Scene escena;
-    public static Banco banco = new Banco(); // Instancia global del banco
-    public static Usuario usuarioAutenticado; // Usuario autenticado global
 
     /**
      * Método principal de inicio de la aplicación.
+     * Inicializa los datos de prueba y muestra la vista de inicio de sesión.
+     *
      * @param stage Ventana principal de JavaFX.
      * @throws IOException Si ocurre un error al cargar la vista.
      */
@@ -45,6 +52,8 @@ public class App extends Application {
 
     /**
      * Carga usuarios, empleados y cuentas de ejemplo para pruebas del sistema.
+     * Este método inicializa administradores, cajeros, clientes y sus cuentas,
+     * así como algunas transacciones de ejemplo.
      */
     private void cargarUsuariosDePrueba() {
         // Administrador activo
@@ -125,6 +134,12 @@ public class App extends Application {
         for (var t : banco.getTransacciones()) {
             System.out.println("ID de transacción: " + t.getIdTransaccion());
         }
+        banco.getPersonas().add(cliente1);
+        banco.getPersonas().add(cliente2);
+        banco.getPersonas().add(cajeroActivo);
+        banco.getPersonas().add(cajeroInactivo);
+        banco.getPersonas().add(adminActivo);
+        banco.getPersonas().add(adminInactivo);
     }
 
     /**

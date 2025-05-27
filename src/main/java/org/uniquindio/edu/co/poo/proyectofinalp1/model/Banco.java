@@ -7,22 +7,49 @@ package org.uniquindio.edu.co.poo.proyectofinalp1.model;
 import java.util.ArrayList;
 
 /**
- * Clase que representa un banco. Contiene listas de usuarios, clientes, cajeros, cuentas y transacciones.
+ * Clase que representa un banco. Contiene listas de usuarios, personas, cuentas y transacciones.
  */
 public class Banco {
-    
+
+    private String nombre;
     private ArrayList<Usuario> usuarios;
-    private ArrayList<Cliente> clientes;
-    private ArrayList<Cajero> cajeros;
+    private ArrayList<Persona> personas; // Ahora una sola lista de personas
     private ArrayList<Cuenta> cuentas;
     private ArrayList<Transaccion> transacciones;
 
-    public Banco() {
+    /**
+     * Constructor de la clase Banco.
+     * @param nombre Nombre del banco.
+     */
+    public Banco(String nombre) {
+        this.nombre = nombre;
         usuarios = new ArrayList<>();
-        clientes = new ArrayList<>();
-        cajeros = new ArrayList<>();
+        personas = new ArrayList<>();
         cuentas = new ArrayList<>();
         transacciones = new ArrayList<>();
+    }
+
+    /**
+     * Constructor por defecto. El nombre será una cadena vacía.
+     */
+    public Banco() {
+        this("");
+    }
+
+    /**
+     * Obtiene el nombre del banco.
+     * @return Nombre del banco.
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Establece el nombre del banco.
+     * @param nombre Nombre del banco.
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
@@ -42,35 +69,19 @@ public class Banco {
     }
 
     /**
-     * Obtiene la lista de clientes del banco.
-     * @return Lista de clientes.
+     * Obtiene la lista de personas del banco.
+     * @return Lista de personas.
      */
-    public ArrayList<Cliente> getClientes() {
-        return clientes;
+    public ArrayList<Persona> getPersonas() {
+        return personas;
     }
 
     /**
-     * Establece la lista de clientes del banco.
-     * @param clientes Lista de clientes.
+     * Establece la lista de personas del banco.
+     * @param personas Lista de personas.
      */
-    public void setClientes(ArrayList<Cliente> clientes) {
-        this.clientes = clientes;
-    }
-
-    /**
-     * Obtiene la lista de cajeros del banco.
-     * @return Lista de cajeros.
-     */
-    public ArrayList<Cajero> getCajeros() {
-        return cajeros;
-    }
-
-    /**
-     * Establece la lista de cajeros del banco.
-     * @param cajeros Lista de cajeros.
-     */
-    public void setCajeros(ArrayList<Cajero> cajeros) {
-        this.cajeros = cajeros;
+    public void setPersonas(ArrayList<Persona> personas) {
+        this.personas = personas;
     }
 
     /**
@@ -103,5 +114,36 @@ public class Banco {
      */
     public void setTransacciones(ArrayList<Transaccion> transacciones) {
         this.transacciones = transacciones;
+    }
+
+    // Métodos utilitarios para filtrar personas por tipo:
+    public ArrayList<Cliente> getClientes() {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        for (Persona p : personas) {
+            if (p instanceof Cliente) {
+                clientes.add((Cliente) p);
+            }
+        }
+        return clientes;
+    }
+
+    public ArrayList<Cajero> getCajeros() {
+        ArrayList<Cajero> cajeros = new ArrayList<>();
+        for (Persona p : personas) {
+            if (p instanceof Cajero) {
+                cajeros.add((Cajero) p);
+            }
+        }
+        return cajeros;
+    }
+
+    public ArrayList<Administrador> getAdministradores() {
+        ArrayList<Administrador> administradores = new ArrayList<>();
+        for (Persona p : personas) {
+            if (p instanceof Administrador) {
+                administradores.add((Administrador) p);
+            }
+        }
+        return administradores;
     }
 }

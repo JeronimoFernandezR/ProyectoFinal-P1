@@ -14,6 +14,12 @@ public abstract class Persona{
     protected String codigo;
     private boolean empleadoActivo;
 
+    /**
+     * Crea una nueva persona con los datos básicos.
+     * @param nombre Nombre de la persona.
+     * @param correo Correo electrónico.
+     * @param id Identificador único.
+     */
     public Persona(String nombre, String correo, String id) {
         this.nombre = nombre;
         this.correo = correo;
@@ -22,7 +28,15 @@ public abstract class Persona{
         
     }
     
-    public Persona(String nombre, String correo, String id, String codigo,boolean empleadoActivo) {
+    /**
+     * Crea una nueva persona con todos los datos.
+     * @param nombre Nombre de la persona.
+     * @param correo Correo electrónico.
+     * @param id Identificador único.
+     * @param codigo Código interno.
+     * @param empleadoActivo Estado de actividad del empleado.
+     */
+    public Persona(String nombre, String correo, String id, String codigo, boolean empleadoActivo) {
         this.nombre = nombre;
         this.correo = correo;
         this.id = id;

@@ -31,17 +31,13 @@ public class Cajero extends Persona {
      * @param cliente Cliente a registrar.
      */
     public void registrarCliente(Cliente cliente) {
-        if (!isEmpleadoActivo()) {
-            System.out.println("El cajero no está activo. No puede registrar clientes.");
-            return;
-        }
-        for (Cliente c : banco.getClientes()) {
-            if (c.getId().equals(cliente.getId())) {
+        for (Persona p : banco.getPersonas()) {
+            if (p instanceof Cliente && p.getId().equals(cliente.getId())) {
                 System.out.println("El cliente con ID " + cliente.getId() + " ya está registrado.");
                 return;
             }
         }
-        banco.getClientes().add(cliente);
+        banco.getPersonas().add(cliente);
         System.out.println("Cliente registrado exitosamente.");
     }
 

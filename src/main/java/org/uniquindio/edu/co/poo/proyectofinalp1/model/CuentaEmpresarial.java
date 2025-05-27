@@ -44,17 +44,11 @@ public class CuentaEmpresarial extends Cuenta {
     }
 
     /**
-     * Genera un reporte de transacciones de alto volumen.
-     * @return Reporte de transacciones.
+     * Realiza un retiro de la cuenta empresarial.
+     * @param monto Monto a retirar.
+     * @param cajero Cajero que realiza la operación.
+     * @return true si el retiro fue exitoso, false en caso contrario.
      */
-    public String generarReporteTransacciones() {
-        StringBuilder reporte = new StringBuilder("Reporte de transacciones para la empresa con NIT: " + NIT + "\n");
-        for (Transaccion transaccion : getTransacciones()) {
-            reporte.append(transaccion.toString()).append("\n");
-        }
-        return reporte.toString();
-    }
-
     @Override
     public boolean retirar(double monto, Cajero cajero) {
         if (monto <= 0 || saldo < monto || cajero == null) {

@@ -41,7 +41,7 @@ public class Administrador extends Persona {
                 return false;
             }
         }
-        banco.getCajeros().add(cajero);
+        banco.getPersonas().add(cajero);
         System.out.println("Cajero agregado exitosamente.");
         return true;
     }
@@ -51,26 +51,15 @@ public class Administrador extends Persona {
      * @param idCajero ID del cajero a eliminar.
      */
     public boolean eliminarCajero(String idCajero) {
-        if (!isEmpleadoActivo()) {
-            System.out.println("El administrador no está activo. No puede eliminar cajeros.");
-            return false;
-        }
-        boolean removed = banco.getCajeros().removeIf(cajero -> cajero.getId().equals(idCajero));
-        if (removed) {
-            System.out.println("Cajero eliminado exitosamente.");
-        } else {
-            System.out.println("No se encontró cajero con ese ID.");
-        }
-        return removed;
+        return banco.getPersonas().removeIf(p -> p instanceof Cajero && p.getId().equals(idCajero));
     }
 
     /**
      * Lista todos los cajeros registrados.
      */
     public void listarCajeros() {
-        System.out.println("Lista de cajeros:");
-        for (Cajero cajero : banco.getCajeros()) {
-            System.out.println("- " + cajero.getNombre() + " (ID: " + cajero.getId() + ")");
+        for (Cajero c : banco.getCajeros()) {
+            System.out.println(c);
         }
     }
 
@@ -91,7 +80,7 @@ public class Administrador extends Persona {
                 return false;
             }
         }
-        banco.getClientes().add(cliente);
+        banco.getPersonas().add(cliente);
         System.out.println("Cliente agregado exitosamente.");
         return true;
     }
@@ -101,26 +90,15 @@ public class Administrador extends Persona {
      * @param idCliente ID del cliente a eliminar.
      */
     public boolean eliminarCliente(String idCliente) {
-        if (!isEmpleadoActivo()) {
-            System.out.println("El administrador no está activo. No puede eliminar clientes.");
-            return false;
-        }
-        boolean removed = banco.getClientes().removeIf(cliente -> cliente.getId().equals(idCliente));
-        if (removed) {
-            System.out.println("Cliente eliminado exitosamente.");
-        } else {
-            System.out.println("No se encontró cliente con ese ID.");
-        }
-        return removed;
+        return banco.getPersonas().removeIf(p -> p instanceof Cliente && p.getId().equals(idCliente));
     }
 
     /**
      * Lista todos los clientes registrados.
      */
     public void listarClientes() {
-        System.out.println("Lista de clientes:");
-        for (Cliente cliente : banco.getClientes()) {
-            System.out.println("- " + cliente.getNombre() + " (ID: " + cliente.getId() + ")");
+        for (Cliente c : banco.getClientes()) {
+            System.out.println(c);
         }
     }
 

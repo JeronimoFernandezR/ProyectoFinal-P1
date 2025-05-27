@@ -53,14 +53,6 @@ public abstract class Cuenta implements Depositable {
     }
 
     /**
-     * Establece el cliente asociado a la cuenta.
-     * @param cliente Cliente asociado.
-     */
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    /**
      * Obtiene la lista de transacciones realizadas en la cuenta.
      * @return Lista de transacciones.
      */

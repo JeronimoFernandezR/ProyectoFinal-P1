@@ -17,8 +17,8 @@ public class Transaccion {
 
     /**
      * Constructor de la clase Transaccion.
-     * @param cuentaOrigen Cuenta de origen de la transacción.
-     * @param cuentaDestino Cuenta de destino de la transacción.
+     * @param cuentaOrigen Cuenta de origen (puede ser null para depósitos).
+     * @param cuentaDestino Cuenta de destino (puede ser null para retiros).
      * @param monto Monto de la transacción.
      * @param idTransaccion Identificador único de la transacción.
      * @param fecha Fecha de la transacción.

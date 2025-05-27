@@ -53,6 +53,10 @@ public class Main {
         usuarioCliente.getListaCuentas().add(cuentaAhorro);
         usuarioCliente.getListaCuentas().add(cuentaCorriente);
 
+        banco.getPersonas().add(cliente);
+        banco.getPersonas().add(cajero);
+        banco.getPersonas().add(admin);
+
         // Prueba: mostrar usuarios y cuentas
         System.out.println("Usuarios en el banco:");
         for (Usuario u : banco.getUsuarios()) {

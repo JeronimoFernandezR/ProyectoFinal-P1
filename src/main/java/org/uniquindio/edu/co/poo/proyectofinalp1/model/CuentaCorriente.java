@@ -1,17 +1,20 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package org.uniquindio.edu.co.poo.proyectofinalp1.model;
 
 import java.util.ArrayList;
 
 /**
- * Clase que representa una cuenta corriente.
- * Diseñada para operaciones diarias con posibilidad de sobregiro.
+ * Representa una cuenta corriente bancaria.
+ * Permite sobregiro hasta un límite definido.
  */
 public class CuentaCorriente extends Cuenta {
-
+    /**
+     * Capacidad máxima de sobregiro permitida.
+     */
     private double capacidadSobregiro;
 
     /**
@@ -31,28 +34,10 @@ public class CuentaCorriente extends Cuenta {
     }
 
     /**
-     * Obtiene la capacidad de sobregiro de la cuenta.
-     * @return Capacidad de sobregiro.
-     */
-    public double getCapacidadSobregiro() {
-        return capacidadSobregiro;
-    }
-
-    /**
-     * Establece la capacidad de sobregiro de la cuenta.
-     * @param capacidadSobregiro Capacidad de sobregiro.
-     */
-    public void setCapacidadSobregiro(double capacidadSobregiro) {
-        if (capacidadSobregiro < 0) {
-            throw new IllegalArgumentException("La capacidad de sobregiro no puede ser negativa.");
-        }
-        this.capacidadSobregiro = capacidadSobregiro;
-    }
-
-    /**
-     * Realiza un retiro de la cuenta, considerando el sobregiro.
+     * Realiza un retiro considerando el sobregiro.
      * @param monto Monto a retirar.
-     * @return `true` si el retiro fue exitoso, `false` en caso contrario.
+     * @param cajero Cajero que realiza la operación.
+     * @return true si el retiro fue exitoso, false en caso contrario.
      */
     @Override
     public boolean retirar(double monto, Cajero cajero) {
@@ -70,9 +55,9 @@ public class CuentaCorriente extends Cuenta {
     }
 
     /**
-     * Deposita un monto en la cuenta corriente.
+     * Realiza un depósito en la cuenta.
      * @param monto Monto a depositar.
-     * @param cajero Cajero desde el cual se realiza el depósito.
+     * @param cajero Cajero que realiza la operación.
      */
     @Override
     public void depositar(double monto, Cajero cajero) {
@@ -82,6 +67,26 @@ public class CuentaCorriente extends Cuenta {
         }
         saldo += monto;
         getTransacciones().add(new Transaccion(null, this, monto, "DEP" + System.currentTimeMillis(), new java.util.Date(), cajero));
+    }
+
+    // Getters y setters documentados
+    /**
+     * Obtiene la capacidad de sobregiro.
+     * @return Capacidad de sobregiro.
+     */
+    public double getCapacidadSobregiro() {
+        return capacidadSobregiro;
+    }
+
+    /**
+     * Establece la capacidad de sobregiro.
+     * @param capacidadSobregiro Nuevo límite de sobregiro.
+     */
+    public void setCapacidadSobregiro(double capacidadSobregiro) {
+        if (capacidadSobregiro < 0) {
+            throw new IllegalArgumentException("La capacidad de sobregiro no puede ser negativa.");
+        }
+        this.capacidadSobregiro = capacidadSobregiro;
     }
 
     /**
