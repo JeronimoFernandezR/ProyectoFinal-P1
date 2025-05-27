@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.uniquindio.edu.co.poo.proyectofinalp1.controller.AdministradorController" prefWidth="1000" prefHeight="600">
+    <children>
+        <TabPane prefWidth="1000" prefHeight="600" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Gestionar Cajeros">
+                    <AnchorPane>
+                        <VBox spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+                            <Label text="Agregar Cajero"/>
+                            <GridPane hgap="10" vgap="10">
+                                <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="nombreCajero" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                <Label text="Correo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="correoCajero" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                <Label text="ID:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextField fx:id="idCajero" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                <Label text="Contraseña:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <PasswordField fx:id="contrasenaCajero" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                <Label text="Código:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                <TextField fx:id="codigoCajero" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                <Label text="Estado Activo:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                <CheckBox fx:id="estadoActivoCajero" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                            </GridPane>
+                            <Button fx:id="btnAgregarCajero" text="Agregar Cajero" onAction="#handleAgregarCajero"/>
+                            <Label text="Listar Cajeros"/>
+                            <TextField fx:id="buscarCajeroPorNombre" promptText="Nombre"/>
+                            <Button fx:id="btnListarCajeros" text="Listar Cajeros" onAction="#handleListarCajeros"/>
+                            <Button fx:id="btnEliminarCajero" text="Eliminar Cajero" onAction="#handleEliminarCajero"/>
+                            <TableView fx:id="tablaCajeros" prefHeight="200">
+                                <columns>
+                                    <TableColumn fx:id="colNombreCajero" text="Nombre"/>
+                                    <TableColumn fx:id="colIdCajero" text="ID"/>
+                                    <TableColumn fx:id="colCorreoCajero" text="Correo"/>
+                                    <TableColumn fx:id="colCiudadCajero" text="Ciudad"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </AnchorPane>
+                </Tab>
+                <Tab text="Gestionar Clientes">
+                    <AnchorPane>
+                        <VBox spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+                            <Label text="Agregar Cliente"/>
+                            <GridPane hgap="10" vgap="10">
+                                <Label text="ID Cliente:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="idCliente" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="nombreCliente" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                <Label text="Correo:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextField fx:id="correoCliente" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                <Label text="Contraseña:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <PasswordField fx:id="contrasenaCliente" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                <Label text="Edad:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                <TextField fx:id="edadCliente" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                                <Label text="Dirección:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                <TextField fx:id="direccionCliente" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                                <Label text="Teléfono:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                                <TextField fx:id="telefonoCliente" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                                <Label text="Ciudad:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                                <TextField fx:id="ciudadCliente" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+                            </GridPane>
+                            <Button fx:id="btnAgregarCliente" text="Agregar Cliente" onAction="#handleAgregarCliente"/>
+                            <Label text="Eliminar Cliente"/>
+                            <TextField fx:id="idEliminarCliente" promptText="ID"/>
+                            <Button text="Eliminar Cliente" fx:id="btnEliminarCliente" onAction="#handleEliminarCliente"/>
+                            <Label text="Listar Clientes"/>
+                            <Button fx:id="btnListarClientes" text="Listar Clientes" onAction="#handleListarClientes"/>
+                            <TableView fx:id="tablaClientes" prefHeight="200">
+                                <columns>
+                                    <TableColumn fx:id="colIdCliente" text="ID Cliente"/>
+                                    <TableColumn fx:id="colNombreCliente" text="Nombre"/>
+                                    <TableColumn fx:id="colCorreoCliente" text="Correo"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </AnchorPane>
+                </Tab>
+                <Tab text="Gestionar Cuentas">
+                    <AnchorPane>
+                        <VBox spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+                            <Label text="Agregar Cuenta"/>
+                            <GridPane hgap="10" vgap="10">
+                                <Label text="ID Cuenta:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="idCuenta" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                <Label text="Tipo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="tipoCuenta" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                <Label text="Saldo Inicial:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextField fx:id="saldoInicialCuenta" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                            </GridPane>
+                            <Button fx:id="btnAgregarCuenta" text="Agregar Cuenta" onAction="#handleAgregarCuenta"/>
+                            <Label text="Eliminar Cuenta"/>
+                            <TextField fx:id="idEliminarCuenta" promptText="ID"/>
+                            <Button text="Eliminar Cuenta" fx:id="btnEliminarCuenta" onAction="#handleEliminarCuenta"/>
+                            <Label text="Listar Cuentas"/>
+                            <Button fx:id="btnListarCuentas" text="Listar Cuentas" onAction="#handleListarCuentas"/>
+                            <TableView fx:id="tablaCuentas" prefHeight="200">
+                                <columns>
+                                    <TableColumn fx:id="colIdCuenta" text="ID Cuenta"/>
+                                    <TableColumn fx:id="colTipoCuenta" text="Tipo"/>
+                                    <TableColumn fx:id="colSaldoCuenta" text="Saldo"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </AnchorPane>
+                </Tab>
+                <Tab text="Supervisar Transacciones">
+                    <AnchorPane>
+                        <VBox spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+                            <Label text="Listar Todas las Transacciones"/>
+                            <Button text="Listar Transacciones" onAction="#handleListarTransacciones"/>
+                            <TableView fx:id="tablaTransacciones" prefHeight="200">
+                                <columns>
+                                    <TableColumn fx:id="colIdTransaccion" text="ID Transacción"/>
+                                    <TableColumn fx:id="colFechaTransaccion" text="Fecha"/>
+                                    <TableColumn fx:id="colTipoTransaccion" text="Tipo"/>
+                                    <TableColumn fx:id="colMontoTransaccion" text="Monto"/>
+                                </columns>
+                            </TableView>
+                            <Label text="Buscar Transacción por ID"/>
+                            <TextField fx:id="idBuscarTransaccion" promptText="ID"/>
+                            <Button fx:id="btnBuscarTransaccion" text="Buscar Transacción" onAction="#handleBuscarTransaccion"/>
+                            <Button text="Volver" onAction="#manejarVolver"/>
+                        </VBox>
+                    </AnchorPane>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

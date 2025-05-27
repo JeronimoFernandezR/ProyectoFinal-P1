@@ -1,0 +1,61 @@
+package org.uniquindio.edu.co.poo.proyectofinalp1.model;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
+class CajeroTest {
+
+    private Banco banco;
+    private Cajero cajero;
+    private Cliente cliente;
+    private CuentaAhorro cuentaAhorro;
+    private CuentaCorriente cuentaCorriente;
+
+    @BeforeEach
+    void setUp() {
+        banco = new Banco();
+        cajero = new Cajero(banco, "Cajero", "cajero@banco.com", "cajero1", "pass", "C001", true);
+        cliente = new Cliente("Cliente", "cliente@banco.com", "cli1", "pass", 25, "Dir", "Tel", "Ciudad");
+        banco.getClientes().add(cliente);
+        cuentaAhorro = new CuentaAhorro("AH001", 1000, cliente, new ArrayList<>());
+        cuentaCorriente = new CuentaCorriente("CC001", 500, cliente, new ArrayList<>(), 200);
+        banco.getCuentas().add(cuentaAhorro);
+        banco.getCuentas().add(cuentaCorriente);
+    }
+
+    @Test
+    void testDepositar() {
+        cajero.depositar(cuentaAhorro, 500);
+        assertEquals(1500, cuentaAhorro.getSaldo());
+    }
+
+    @Test
+    void testRetirar() {
+        cajero.retirar(cuentaAhorro, 200);
+        assertEquals(800, cuentaAhorro.getSaldo());
+    }
+
+    @Test
+    void testTransferir() {
+        cajero.transferir(banco, cuentaAhorro, cuentaCorriente, 300);
+        assertEquals(700, cuentaAhorro.getSaldo());
+        assertEquals(800, cuentaCorriente.getSaldo());
+    }
+
+    @Test
+    void testRetiroExcedeSaldoCorrienteConSobregiro() {
+        boolean result = cuentaCorriente.retirar(650, cajero);
+        assertTrue(result);
+        assertEquals(500 - 650, cuentaCorriente.getSaldo());
+    }
+
+    @Test
+    void testRetiroExcedeLimite() {
+        boolean result = cuentaAhorro.retirar(9_000_000, cajero);
+        assertFalse(result);
+        assertEquals(1000, cuentaAhorro.getSaldo());
+    }
+}

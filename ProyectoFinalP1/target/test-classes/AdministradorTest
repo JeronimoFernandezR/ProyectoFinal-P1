@@ -1,0 +1,48 @@
+package org.uniquindio.edu.co.poo.proyectofinalp1.model;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
+class AdministradorTest {
+
+    private Banco banco;
+    private Administrador admin;
+
+    @BeforeEach
+    void setUp() {
+        banco = new Banco();
+        admin = new Administrador(banco, "Admin", "admin@banco.com", "admin1", "adminpass", "A001", true);
+    }
+
+    @Test
+    void testAgregarYEliminarCajero() {
+        Cajero cajero = new Cajero(banco, "Cajero1", "cajero@banco.com", "cajero1", "pass", "C001", true);
+        admin.agregarCajero(cajero);
+        assertEquals(1, banco.getCajeros().size());
+        admin.eliminarCajero("cajero1");
+        assertEquals(0, banco.getCajeros().size());
+    }
+
+    @Test
+    void testAgregarYEliminarCliente() {
+        Cliente cliente = new Cliente("Cliente", "cliente@banco.com", "cli1", "pass", 25, "Dir", "Tel", "Ciudad");
+        admin.agregarCliente(cliente);
+        assertEquals(1, banco.getClientes().size());
+        admin.eliminarCliente("cli1");
+        assertEquals(0, banco.getClientes().size());
+    }
+
+    @Test
+    void testAgregarYEliminarCuenta() {
+        Cliente cliente = new Cliente("Cliente", "cliente@banco.com", "cli1", "pass", 25, "Dir", "Tel", "Ciudad");
+        admin.agregarCliente(cliente);
+        CuentaAhorro cuenta = new CuentaAhorro("AH001", 1000, cliente, new ArrayList<>());
+        admin.agregarCuenta(cuenta);
+        assertEquals(1, banco.getCuentas().size());
+        admin.eliminarCuenta("AH001");
+        assertEquals(0, banco.getCuentas().size());
+    }
+}
